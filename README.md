@@ -131,6 +131,14 @@ first, we need to pass the homeLink value from parent to Home component
   initialLink={this.state.homeLink}
 />
 ```
+we need to make sure that homeLink has been set up in the constructor as this.state:
+
+```javascript
+this.state = {
+  homeLink: 'Home',
+      }
+```
+
 then, we can bind the value of the homeLink to our input and add a onChange listener to set up two way binding -> to do something whenever the input field changes
 ```javascript
 <input type="text" value={this.props.initialLink} onChange={}/>
