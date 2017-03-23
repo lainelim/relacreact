@@ -90,14 +90,14 @@ since we want to be able to change the link name via home, we have to pass the o
 in the Home component we will need to create a function to call the method passed as the props
 
 ```javascript
-onChangeLink () {
+onChangeHandler () {
   this.props.changeLink(this.state.homeLink)
 }
 ```
 then we create a button to change the link name
 
 ```javascript
-  <button onClick={this.onChangeLink.bind(this)} className='btn btn-primary'>Change Header Link</button>
+  <button onClick={this.onChangeHandler.bind(this)} className='btn btn-primary'>Change Header Link</button>
 ```
 
 this.state.homeLink is currently undefined, so we need to add it. Say we want to set it as "changed link"
