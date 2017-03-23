@@ -85,6 +85,7 @@ export class Home extends React.Component {
     return (
       <div>
         <p> In a new Component!</p>
+            {console.log(2+2)}
         <p> Your name is {this.props.name}, your age is {this.state.age}</p>
         <p> Status: {this.state.status }</p>
         <hr />
