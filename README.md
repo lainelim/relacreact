@@ -4,54 +4,61 @@ lets say we want to pass a function to the home component which is a child of th
 
 index.js under class App
 
+``` javascript
 onGreet () {
   window.alert('hello!')
 }
-
+```
 We want to call this onGreet function in the child component. in order to do this we need to pass the link to the Home child.
 
+```javascript
 <Home greet={this.onGreet} />
+```
 
 there is no need to do any binding because the key word 'this' is not present in the method.
 
 Then, we switch over to the home component where we will add a button in the rendering
-
+```javascript
 <button className='btn btn-primary' onClick={this.props.greet}>
   Greet
 </button>
+```
 
 this.props.greet refers to the 'greet' method that was passed over from the parent in index.js.
 
 As good practice, we should also include the function in the propTypes
 
+```javascript
 greet: React.PropTypes.func
+```
 
 # how to pass data which was inputted in an input field
 
 say we want to change the name of our home link in the header component via user interaction in the home component.
 
 on App.js, we have a function to update the name of the homeLink:
-
+```javascript
 onChangeLink (newName) {
   this.setState({
     homeLink: newName
   })
 }
-
+```
 therefore, we also need to include the homeLink in our initial state by adding the constructor:
+```javascript
 constructor(){
   super()
   this.state={
     homeLink:"home"
   }
 }
-
+```
 under our header, we also pass this state as a props:
-
+```javascript
 <Header homeLink={this.state.homeLink} />
-
+```
 since we want to be able to change the link name via home, we have to pass the onChangeLink function to the Home component.
-
+```javascript
 <Home
   name={'Max'}
   initialAge={29}
@@ -59,24 +66,29 @@ since we want to be able to change the link name via home, we have to pass the o
   changeLink={this.onChangeLink.bind(this)}
   initialLink={this.state.homeLink}
 />
-
+```
 in the Home component we will need to create a function to call the method passed as the props
 
+```javascript
 onChangeLink () {
   this.props.changeLink(this.state.homeLink)
 }
-
+```
 then we create a button to change the link name
 
+```javascript
   <button onClick={this.onChangeLink.bind(this)} className='btn btn-primary'>Change Header Link</button>
+```
 
 this.state.homeLink is currently undefined, so we need to add it. Say we want to set it as "changed link"
 
+```javascript
 this.state = {
   age: props.initialAge,
   status: 0,
   homeLink: "changed link"
 }
+```
 
 so by executing the button, we updated the parent homeLink name and this was passed as a prop to the Header component.
 
@@ -88,7 +100,6 @@ so in the home component, we add a text input field for users. we want to achiev
 * allow users to see what is the current link name
 * to allow users to input what they would like the current link name to be.
 
-f
 
 <input type="text" value=""/>
 
