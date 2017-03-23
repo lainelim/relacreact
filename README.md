@@ -64,7 +64,6 @@ since we want to be able to change the link name via home, we have to pass the o
   initialAge={29}
   greet={this.onGreet}
   changeLink={this.onChangeLink.bind(this)}
-  initialLink={this.state.homeLink}
 />
 ```
 in the Home component we will need to create a function to call the method passed as the props
@@ -100,17 +99,59 @@ so in the home component, we add a text input field for users. we want to achiev
 * allow users to see what is the current link name
 * to allow users to input what they would like the current link name to be.
 
+first, we need to pass the homeLink value from parent to Home component
 
-<input type="text" value=""/>
+```javascript
+<Home
+  name={'Max'}
+  initialAge={29}
+  greet={this.onGreet}
+  changeLink={this.onChangeLink.bind(this)}
+  initialLink={this.state.homeLink}
+/>
+```
+then, we can bind the value of the homeLink to our input and add a onChange listener to set up two way binding -> to do something whenever the input field changes
+```javascript
+<input type="text" value={this.props.initialLink} onChange={}/>
+```
+we want to pass a function to the onChange handler to execute on Home.js
 
+```javascript
+onHandleChange (event) {
+  this.setState({
+    homeLink: event.target.value
+  })
+}
+```
 
+with that we can place the object in the onChange handler for execution whenever there is a change in value:
 
+```javascript
+<input type='text'
+  value={this.props.initialLink}
+  onChange={(event) => this.onHandleChange(event)}
+/>
+```
 
+this does not work because while our handler executes onHandleChange to change the state, the value of the input refers to the property that was passed in from the parent. We need to change the value to:
 
+```javascript
+<input type='text'
+  value={this.state.homeLink}
+  onChange={(event) => this.onHandleChange(event)}
+/>
+```
+at the constructor in Home component, homeLink was hard coded as "changed link", so we will need to change to
 
+```javascript
 
+this.state = {
+  age: props.initialAge,
+  status: 0,
+  homeLink: props.initialLink
+}
 
-
+```
 
 
 
