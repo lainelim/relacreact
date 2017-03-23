@@ -137,6 +137,7 @@ Lifecycle methods are not very complicated. We can think of them as glorified ev
 
 in Home.js
 
+```javascript
 // Immediately before INITIAL rendering
 // If this.setState executed here, will change the initial render
 componentWillMount () {
@@ -146,12 +147,10 @@ componentWillMount () {
 componentDidMount () {
   console.log('Component did mount')
 }
-
 // When component receives new props
 componentWillReceiveProps (nextProps) {
   console.log('Component will receive props', nextProps)
 }
-
 // Before rendering, after receiving new props or state. Control if re-render possible!
 // return false and it won't render! Can use if/else statement here to control if re-render allowed.
 shouldComponentUpdate (nextProps, nextState) {
@@ -176,21 +175,25 @@ componentDidUpdate (prevProps, prevState) {
 componentWillUnmount () {
   console.log('Component will unmount')
 }
-
+```
 on INDEX.JS
 
 under constructor:
+```javascript
 homeMounted: true
-
+```
 
 add new function
+```javascript
 onChangeHomeMounted () {
   this.setState({
     homeMounted: !this.state.homeMounted
   })
 }
+```
 
-under render()
+under render():
+```javascript
 let homeComponent = "";
 if (this.state.homeMounted){
     homeComponent = (
@@ -204,9 +207,10 @@ if (this.state.homeMounted){
     )
   }  
 }
+```
+under return():
 
-under return()
-
+```javascript
 <div className='row'>
   <div className='col-xs-10 col-xs-offset-1'>
     {homeComponent}
@@ -218,3 +222,4 @@ under return()
     <button onClick={this.onChangeHomeMounted.bind(this)} className='btn btn-primary'>(Un)Mount Home Component</button>
   </div>
 </div>
+```
