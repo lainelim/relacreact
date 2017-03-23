@@ -169,6 +169,8 @@ Components follow a life cycle for all such tasks
 
 Lifecycle methods are not very complicated. We can think of them as glorified event handlers that get called at various points in a component's life, and just like event handlers, you can write some code to do things at those various points.
 
+<img src="http://i.imgur.com/dDSyhdj.png">
+
   - componentWillMount (immediately before initial rendering of a component)
   - componentDidMount (immediately after initial rendering)
   - componentWillReceiveProps (whenever component receive new props when state changes)
