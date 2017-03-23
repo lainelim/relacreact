@@ -58,6 +58,25 @@ under our header, we also pass this state as a props:
 ```javascript
 <Header homeLink={this.state.homeLink} />
 ```
+
+just to check in our header component if we have already accessed the the props:
+
+```javascript
+export const Header = (props) => {
+  return (
+    <nav className='navbar navbar-default'>
+      <div className='container'>
+        <div className='navbar-header'>
+          <ul className='nav navbar-nav'>
+            <li><a href='#'>{props.homeLink}</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  )
+}
+```
+
 since we want to be able to change the link name via home, we have to pass the onChangeLink function to the Home component.
 ```javascript
 <Home
@@ -67,6 +86,7 @@ since we want to be able to change the link name via home, we have to pass the o
   changeLink={this.onChangeLink.bind(this)}
 />
 ```
+
 in the Home component we will need to create a function to call the method passed as the props
 
 ```javascript
