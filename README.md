@@ -28,12 +28,69 @@ greet: React.PropTypes.func
 
 # how to pass data which was inputted in an input field
 
-say we want to change the name of our home link in the 
+say we want to change the name of our home link in the header component via user interaction in the home component.
 
+on App.js, we have a function to update the name of the homeLink:
 
+onChangeLink (newName) {
+  this.setState({
+    homeLink: newName
+  })
+}
 
+therefore, we also need to include the homeLink in our initial state by adding the constructor:
+constructor(){
+  super()
+  this.state={
+    homeLink:"home"
+  }
+}
 
+under our header, we also pass this state as a props:
 
+<Header homeLink={this.state.homeLink} />
+
+since we want to be able to change the link name via home, we have to pass the onChangeLink function to the Home component.
+
+<Home
+  name={'Max'}
+  initialAge={29}
+  greet={this.onGreet}
+  changeLink={this.onChangeLink.bind(this)}
+  initialLink={this.state.homeLink}
+/>
+
+in the Home component we will need to create a function to call the method passed as the props
+
+onChangeLink () {
+  this.props.changeLink(this.state.homeLink)
+}
+
+then we create a button to change the link name
+
+  <button onClick={this.onChangeLink.bind(this)} className='btn btn-primary'>Change Header Link</button>
+
+this.state.homeLink is currently undefined, so we need to add it. Say we want to set it as "changed link"
+
+this.state = {
+  age: props.initialAge,
+  status: 0,
+  homeLink: "changed link"
+}
+
+so by executing the button, we updated the parent homeLink name and this was passed as a prop to the Header component.
+
+# 2 way-binding
+
+what if we wanted to allow users to change the name of the link to whatever they want?
+
+so in the home component, we add a text input field for users. we want to achieve 2 things:
+* allow users to see what is the current link name
+* to allow users to input what they would like the current link name to be.
+
+f
+
+<input type="text" value=""/>
 
 
 
