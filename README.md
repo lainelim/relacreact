@@ -28,6 +28,7 @@ export class Home extends React.Component {
 ```
 ### Stateless Component
 * A component that only has props or may not even have props
+* It's simply a function that takes props and spits out HTML
 * Good practice to use state carefully as state management can get tricky in more complex application
 
 In Header.js,
@@ -50,3 +51,9 @@ In index.js,
 ```javascript
 <Header homeLink="Home"/>
 ```
+#### Why use stateless component
+* No class needed
+* No 'this' keyword
+* Easy to test
+* Improve performance
+* To find out more: https://hackernoon.com/react-stateless-functional-components-nine-wins-you-might-have-overlooked-997b0d933dbc#.uz9b8vvga
