@@ -53,6 +53,7 @@ export class Header extends React.Component{
 
   import React from "react";
   export class Home extends React.Component{
+
     render(){
       return(
         <div>
@@ -63,9 +64,152 @@ export class Header extends React.Component{
     }
   }
 
-Try: {2+2
-        5 },
-    {console.log("hello")}
-Any javascript code can be written and its result will be displayed
+Try: {2+2;
+        5; },
+Try variables defined inside render()
+ let content=''
+          if (true)
+          {
+            content = <p>Something</p>
+          }
+        return(
+          <div>
+            <p> In a new Component </p>
+              {content}
+            </div>
+Try: {console.log("hello")}
+Try: {(5===2)? "True":"False"}
+Any javascript expression can be written and its result will be displayed
 
   ```
+
+In Index.js:
+```javascript
+
+
+  import React from 'react'
+  import {render} from 'react-dom'
+
+  import {Header} from './components/Header'
+  import {Home} from './components/Home'
+
+  class App extends React.Component {
+    render(){
+      var user={
+        name: "Anna",
+          hobbies: ["Sports"]
+      }
+      return (  // Return what should be rendered
+        // Note only one parent is allowed! You can nest as many as you like
+        <div className='container'>
+          <div className='row'>
+            <div className='col-xs-10 col-xs-offset-1'>
+              <Header />
+            </div>
+          </div>
+          <div className='row'>
+            <div className='col-xs-10 col-xs-offset-1'>
+              <Home name={"Max"} age={27} user={user}/>
+            </div>
+          </div>
+        </div>
+      )
+    }
+  }
+
+  render(<App />, document.getElementById('app'))
+
+In Home.js;
+
+import React from "react";
+export class Home extends React.Component{
+  render(){
+    console.log(this.props)
+    return(
+      <div>
+        <p> In a new Component </p>
+        <p> Your name is {this.props.name}, your age is {this.props.age}</p>
+        <p> User Object => Name: {this.props.user.name} </p>
+        <div>
+          <h4>Hobbies</h4>
+          <ul>
+            {this.props.user.hobbies.map((hobby) => <li>{hobby}</li>)}
+          </ul>
+        </div>
+      </div>
+    );
+  }
+}
+
+Let us add "sports" as a hobby in hobbies[] and also add key for each <li> element in Home.js
+{this.props.user.hobbies.map((hobby, i) =>  <li key={i}>{hobby}</li>)}
+
+Concept of Children of Home:
+In Index.js;
+
+  import React from 'react'
+  import {render} from 'react-dom'
+
+  import {Header} from './components/Header'
+  import {Home} from './components/Home'
+
+  class App extends React.Component {
+    render(){
+      var user={
+        name: "Anna",
+          hobbies: ["Sports", "Reading"]
+      }
+      return (  // Return what should be rendered
+        // Note only one parent is allowed! You can nest as many as you like
+        <div className='container'>
+          <div className='row'>
+            <div className='col-xs-10 col-xs-offset-1'>
+              <Header />
+            </div>
+          </div>
+          <div className='row'>
+            <div className='col-xs-10 col-xs-offset-1'>
+              <Home name={"Max"} age={27} user={user}>
+              <p>This is a paragraph</p>
+              </Home>
+            </div>
+          </div>
+        </div>
+      )
+    }
+  }
+
+render(<App />, document.getElementById('app'))
+
+In Home.js;
+
+  import React from "react";
+  export class Home extends React.Component{
+    render(){
+      var text = "Something"
+      console.log(this.props)
+      return(
+        <div>
+          <p> In a new Component </p>
+          <p> Your name is {this.props.name}, your age is {this.props.age}</p>
+          <p> User Object => Name: {this.props.user.name} </p>
+          <div>
+            <h4>Hobbies</h4>
+            <ul>
+              {this.props.user.hobbies.map((hobby, i) => <li key={i}>{hobby}</li>)}
+            </ul>
+          </div>
+          <hr/>
+          {this.props.children}
+        </div>
+      );
+    }
+  }
+
+Home.propTypes = {
+  name: React.PropTypes.string,
+  age: React.PropTypes.number,
+  user: React.PropTypes.object,
+  children: React.PropTypes.element.isRequired
+};
+```
