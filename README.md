@@ -1,41 +1,15 @@
-# First Component
-## Index.js
-import React from 'react';  
-import { render } from 'react-dom';
-
-class App extends React.Component {
-
-    render() {
-        return (
-          *JSX here*
-          *JS mixed with HTML*
-          *similar to document.createElement("div")*
-          *have to use className instead of class, even though it looks like HTML code, it is JS*
-            <div className="container">
-                <div className="row">
-                    <div className="col-xs-10 col-xs-offset-1">
-                        <h1>Hello!</h1>
-                    </div>
-                </div>
-            </div>
-          *there can only be one root element (one div), okay to have nested elements, but cannot have sibling div*
-        );
-    }
-}
-
-*(call the render method from React-DOM)*   
-*(first argument is the component to be rendered, second argument is where you want to render it in your view)*    
-render(<App />, window.document.getElementById('app'));  
-*(tell reactjs to render the App component in the div with id 'app')*
-
 # Multiple Components  
-*create Components folder in src/app*   
-*create 'Home' component (Home.js) which is the main page component*  
-*create 'Header' component (Header.js) which is the top of the page, or navbar*
-## Header.js
-import React from "react";
-*don't need to import render from React-DOM here because we are not rendering anything*
+Apart from creating individual components and loading them into the DOM, we can also combine components together.
 
+Create 2 new components, header.js which will contain the navbar and home.js which is the main component on our page.
+
+## header.js
+
+```javascript
+import React from 'react'
+// don't have to import react-dom as header component is not going to be rendered directly into index.html
+
+// add export in front of class so that it can be used in index.js
 export class Header extends React.Component {
     render() {
         return (
@@ -43,7 +17,7 @@ export class Header extends React.Component {
                 <div className="container">
                     <div className="navbar-header">
                         <ul className="nav navbar-nav">
-                            <li><a href="#">Home</a></li>
+                            <li><a href="">Home</a></li>
                         </ul>
                     </div>
                 </div>
@@ -51,7 +25,9 @@ export class Header extends React.Component {
         );
     }
 }
+```
 ## Home.js
+```javascript
 import React from "react";
 
 export class Home extends React.Component {
@@ -63,11 +39,15 @@ export class Home extends React.Component {
         );
     }
 }
+```
+
 ## Index.js
-import React from 'react';  
+```javascript
+import React from 'react';
 import { render } from 'react-dom';
 
-import { Header } from "./components/Header";    
+// import the 2 newly created components
+import { Header } from "./components/Header";
 import { Home } from "./components/Home";
 
 class App extends React.Component {
@@ -78,7 +58,6 @@ class App extends React.Component {
                 <div className="row">
                     <div className="col-xs-10 col-xs-offset-1">
                         <Header/>
-                        *Header tag above is to tell reactjs to include the {Header} component which we imported here*
                     </div>
                 </div>
                 <div className="row">
@@ -92,3 +71,35 @@ class App extends React.Component {
 }
 
 render(<App />, window.document.getElementById('app'));
+```
+## Things to Note
+There are 2 ways you can import a file, depending on how you write your export syntax. The first way is stated above.
+
+The other way is when you do your exporting at the end of the script as follows:
+```javascript
+// In header.js
+import React from "react";
+
+class Header extends React.Component {
+    render() {
+        return (
+            <nav className="navbar navbar-default">
+                <div className="container">
+                    <div className="navbar-header">
+                        <ul className="nav navbar-nav">
+                            <li><a href="">Home</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        );
+    }
+}
+
+export default Header
+```
+How you import it in index.js:
+```javascript
+// Header without the curly braces
+import Header from "./components/Header";
+```
