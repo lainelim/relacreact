@@ -1,6 +1,4 @@
-# index.js
-
-
+# home.js
 
 ```
 import React from "react";
